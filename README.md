@@ -17,28 +17,13 @@ Part of animating with SVGs is getting references to elements in code and passin
 
 ## Quick Example
 
-First create an Illustrator file, add an element and change its layer name to say `#class=my-element`. Export the SVG using the **File > Export > Export for Screens** option with the following settings. Call the svg `animation.svg`.
+Download the [svg tools]() and unzip them into your project folder.
 
+Create an Illustrator file, add an element and change its layer name to say `#class=my-element`. Export the SVG using the **File > Export > Export for Screens** option with the following settings. Call the svg `animation.svg`.
 
 ![Illustrator svg export settings](svg-settings.png)
 
-
-Download the [svg tools]() and unzip them into your project folder. Open the file called `run.py`. Here you can edit how the SVGs will be processed.
-
-```
-from svg import *
-
-compile_svg('animation.svg', 'processed_animation.svg', 
-{
-	'process_layer_names': True
-})
-
-inline_svg('animation.html', 'output/animation.html')
-
-```
-
-Create a HTML file as below. This will pull in SVGs so we don't need to copy-paste anything.
-
+Create a HTML file as below. The import statements inline the SVG inline into our HTML file so we don't have to do any copy and pasting. Not strictly neccessary but makes the workflow a little easier. Save it as `animation.html`.
 
 ```
 <!DOCTYPE html>
@@ -54,9 +39,24 @@ Create a HTML file as below. This will pull in SVGs so we don't need to copy-pas
 </html>
 ```
 
-Open the command line and navigate to your project folder. Call the script using `python parallax_svg_tools/run.py`. You should see a list of processed files (or just one in this case) printed to the console if everything worked correctly.
 
-There should now be a folder called output containing a HTML file with your processed SVG in it. All that is left to do is animate it with your tool of choice (ours is [GSAP](https://greensock.com/)).
+Open the file called `run.py`. Here you can edit how the SVGs will be processed. The default looks like this. The sections below describe what the various options do.
+
+```
+from svg import *
+
+compile_svg('animation.svg', 'processed_animation.svg', 
+{
+	'process_layer_names': True,
+	'namespace' : 'example'
+})
+
+inline_svg('animation.html', 'output/animation.html')
+```
+
+Open the command line and navigate to your project folder. Call the script using `python parallax_svg_tools/run.py`. You should see a list of processed files (or just one in this case) printed to the console if everything worked correctly. Note that the script must be called from a directory that has access to the svg files.
+
+There should now be a folder called `output` containing an `animation.html` file with your processed SVG in it. All that is left to do is animate it with your tool of choice (ours is [GSAP](https://greensock.com/)).
 
 
 ## Functions
