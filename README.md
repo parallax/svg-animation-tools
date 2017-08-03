@@ -17,7 +17,7 @@ Part of animating with SVGs is getting references to elements in code and passin
 
 ## Quick Example
 
-Download the [svg tools]() and unzip them into your project folder.
+Download the [svg tools](parallax_svg_tools.zip) and unzip them into your project folder.
 
 Create an Illustrator file, add an element and change its layer name to say `#class=my-element`. Export the SVG using the **File > Export > Export for Screens** option with the following settings. Call the svg `animation.svg`.
 
