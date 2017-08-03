@@ -17,24 +17,23 @@ Part of animating with SVGs is getting references to elements in code and passin
 
 ## Quick Example
 
-First create an Illustrator file, add an element and change its layer name to say `#class=my-element`. Export the SVG using the **File > Export > Export for Screens** option with the following settings.
+First create an Illustrator file, add an element and change its layer name to say `#class=my-element`. Export the SVG using the **File > Export > Export for Screens** option with the following settings. Call the svg `animation.svg`.
 
 
 ![Illustrator svg export settings](svg-settings.png)
 
 
-Download the [svg tools]() and unzip them into your project folder. 
-Create a text file called `process_svg.py` (or whatever you want) with the following code.
+Download the [svg tools]() and unzip them into your project folder. Open the file called `run.py`. Here you can edit how the SVGs will be processed.
 
 ```
-from svg_tools import *
+from svg import *
 
 compile_svg('animation.svg', 'processed_animation.svg', 
 {
 	'process_layer_names': True
 })
 
-inline_svg('animation.html', 'index.html')
+inline_svg('animation.html', 'output/animation.html')
 
 ```
 
@@ -55,9 +54,9 @@ Create a HTML file as below. This will pull in SVGs so we don't need to copy-pas
 </html>
 ```
 
-Open the command line and navigate to your project folder. Call the script using `python process_svg.py`. You should see a list of processed files (or just one in this case) printed to the console if everything worked correctly.
+Open the command line and navigate to your project folder. Call the script using `python parallax_svg_tools/run.py`. You should see a list of processed files (or just one in this case) printed to the console if everything worked correctly.
 
-You should now have a HTML file with your processed SVG in it. All that is left to do is animate it with your tool of choice (ours is [GSAP](https://greensock.com/)).
+There should now be a folder called output containing a HTML file with your processed SVG in it. All that is left to do is animate it with your tool of choice (ours is [GSAP](https://greensock.com/)).
 
 
 ## Functions

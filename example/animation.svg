@@ -1,0 +1,6 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <title>animation</title>
+  <rect id="_class_my-element_origin_144_234" data-name="#class=my-element, origin=144 234" x="144" y="234" width="148" height="148"/>
+  <rect id="_id_my-unique-element" data-name="#id=my-unique-element" x="316" y="234" width="148" height="148" fill="#29abe2"/>
+  <rect id="_class_my-element" data-name="#class=my-element" x="488" y="234" width="148" height="148" fill="#fbb03b"/>
+</svg>

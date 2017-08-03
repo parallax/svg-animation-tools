@@ -1,14 +1,29 @@
 # Super simple Illustrator SVG processor for animations. Uses the BeautifulSoup python xml library. 
 
 import os
+import errno
 from bs4 import BeautifulSoup
 
+def create_file(path, mode):
+	directory = os.path.dirname(path)
+	if directory != '' and not os.path.exists(directory):
+		try:
+			os.makedirs(directory)
+		except OSError as e:
+		    if e.errno != errno.EEXIST:
+		        raise
+	
+	file = open(path, mode)
+	return file
 
 def parse_svg(path, namespace, options):
-	print(path)
+	#print(path)
 	file = open(path,'r')
 	file_string = file.read().decode('utf8')
 	file.close();
+
+	if namespace == None:
+		namespace = ''
 
 	# BeautifulSoup can't parse attributes with dashes so we replace them with underscores instead		
 	file_string = file_string.replace('data-name', 'data_name')
@@ -123,7 +138,7 @@ def parse_svg(path, namespace, options):
 				if (len(split) < 2): continue
 				key = split[0]
 				value = split[1]
-				if key == 'id': value = namespace + '-' + value
+				if key == 'id' or key == 'class': value = namespace + '-' + value
 				element[key] = value
 	
 	
@@ -146,24 +161,25 @@ def parse_svg(path, namespace, options):
 
 
 def write_svg(svg, dst_path, options):
-	result = None
+	
+	result = str(svg)
+	result = unicode(result, "utf8")	
+	#Remove self closing tags
+	result = result.replace('></circle>','/>') 
+	result = result.replace('></rect>','/>') 
+	result = result.replace('></path>','/>') 
+	result = result.replace('></polygon>','/>')
+
 	if 'nowhitespace' in options and options['nowhitespace'] == True:
-		result = str(svg)
-		result = unicode(result, "utf8")		
 		result = result.replace('\n','')
-		#Remove self closing tags
-		result = result.replace('></circle>','/>') 
-		result = result.replace('></rect>','/>') 
-		result = result.replace('></path>','/>') 
-		result = result.replace('></polygon>','/>')
-	else:
-		result = svg.prettify()
+	#else:
+	#	result = svg.prettify()
 
 	# bs4 incorrectly outputs clippath instead of clipPath 
 	result = result.replace('clippath', 'clipPath')
 	result = result.encode('UTF8')
 
-	result_file = open(dst_path, 'wb')
+	result_file = create_file(dst_path, 'wb')
 	result_file.write(result)
 	result_file.close()
 
@@ -171,7 +187,9 @@ def write_svg(svg, dst_path, options):
 
 def compile_svg(src_path, dst_path, options):
 	namespace = None
-	if(options.namespace): namespace = options.namespace
+
+	if 'namespace' in options: 
+		namespace = options['namespace']
 	svg = parse_svg(src_path, namespace, options)
 
 	if 'attributes' in options: 
@@ -270,7 +288,8 @@ def parse_markup(src_path, output):
 
 def inline_svg(src_path, dst_path):
 	output = [];
-	file = open(dst_path, 'w')
+
+	file = create_file(dst_path, 'w')
 	parse_markup(src_path, output)
 	for line in output: file.write(line)
 	file.close()

@@ -1,0 +1,6 @@
+<svg viewbox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+<title>animation</title>
+<rect class="example-my-element" height="148" origin="144 234" width="148" x="144" y="234"/>
+<rect fill="#29abe2" height="148" id="example-my-unique-element" width="148" x="316" y="234"/>
+<rect class="example-my-element" fill="#fbb03b" height="148" width="148" x="488" y="234"/>
+</svg>
