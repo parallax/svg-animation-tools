@@ -3,7 +3,7 @@
 A simple set of python functions to help working with animated SVGs exported from Illustrator. More features coming soon!
 We used it to create animations like this.
 
-![Viva La Velo intro animation](vlv-intro-gif.gif)
+![Viva La Velo intro animation](vlv-intro-gif.gif)  
 [Viva La Velo](https://parall.ax/viva-le-velo)
 
 
