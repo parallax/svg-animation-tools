@@ -14,7 +14,7 @@ Part of animating with SVGs is getting references to elements in code and passin
 
 This is the what the svg code looks like before and after the processing step.
 
-```
+```xml
 <!-- Before post processer -->
 <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
   <rect id="_class_my-element_origin_144_234" data-name="#class=my-element, origin=144 234" x="144" y="234" width="148" height="148"/>
@@ -43,7 +43,7 @@ Create an Illustrator file, add an element and change its layer name to say `#cl
 
 Create a HTML file as below. The import statements inline the SVG inline into our HTML file so we don't have to do any copy and pasting. Not strictly neccessary but makes the workflow a little easier. Save it as `animation.html`.
 
-```
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,7 +60,7 @@ Create a HTML file as below. The import statements inline the SVG inline into ou
 
 Open the file called `run.py`. Here you can edit how the SVGs will be processed. The default looks like this. The sections below describe what the various options do.
 
-```
+```javascript
 from svg import *
 
 compile_svg('animation.svg', 'processed_animation.svg', 
