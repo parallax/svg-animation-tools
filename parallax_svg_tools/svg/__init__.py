@@ -24,6 +24,8 @@ def parse_svg(path, namespace, options):
 
 	if namespace == None:
 		namespace = ''
+	else:
+		namespace = namespace + '-'
 
 	# BeautifulSoup can't parse attributes with dashes so we replace them with underscores instead		
 	file_string = file_string.replace('data-name', 'data_name')
@@ -34,8 +36,8 @@ def parse_svg(path, namespace, options):
 	
 	# Add namespaces to ids
 	if namespace:
-		file_string = file_string.replace('id="', 'id="' + namespace + '-')
-		file_string = file_string.replace('url(#', 'url(#' + namespace + '-')
+		file_string = file_string.replace('id="', 'id="' + namespace)
+		file_string = file_string.replace('url(#', 'url(#' + namespace)
 
 	svg = BeautifulSoup(file_string, 'html.parser')
 
@@ -48,7 +50,7 @@ def parse_svg(path, namespace, options):
 	for element in use_elements:
 		if namespace:
 			href = element['xlink:href']
-			element['xlink:href'] = href.replace('#', '#' + namespace + '-')
+			element['xlink:href'] = href.replace('#', '#' + namespace)
 
 		del element['id']
 
@@ -58,6 +60,10 @@ def parse_svg(path, namespace, options):
 		titles = svg.select('title')
 		for t in titles: t.extract()
 
+	# remove description
+	if 'description' in options and options['description'] == False:
+		descriptions = svg.select('desc')
+		for d in descriptions: d.extract()
 
 	foreign_tags_to_add = []
 	if 'convert_svg_text_to_html' in options and options['convert_svg_text_to_html'] == True:
@@ -109,7 +115,7 @@ def parse_svg(path, namespace, options):
 					if (len(split) < 2): continue
 					key = split[0]
 					value = split[1]
-					if key == 'id': key = namespace + '-' + key
+					if key == 'id': key = namespace + key
 					foreign_object_tag[key] = value
 			
 			foreign_object_tag.append(text_tag)
@@ -138,7 +144,7 @@ def parse_svg(path, namespace, options):
 				if (len(split) < 2): continue
 				key = split[0]
 				value = split[1]
-				if key == 'id' or key == 'class': value = namespace + '-' + value
+				if key == 'id' or key == 'class': value = namespace + value
 				element[key] = value
 	
 	
