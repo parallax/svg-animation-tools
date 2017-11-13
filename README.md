@@ -110,7 +110,7 @@ Sets the description or removes it completely when set to `false`
 Converts SVG text in HTML text via the foriegn object tag reducing file bloat and allowing you to style it with CSS. Requires the text be grouped inside a rectangle with the layer name set to `#TEXT`. 
 
 + **spirit:**
-Expands `#spirit='my-id` to `data-spirit-id` when set to `true` for use with the [Spirit animation app](<https://spiritapp.io/>)
+Expands `#spirit=my-id` to `data-spirit-id` when set to `true` for use with the [Spirit animation app](<https://spiritapp.io/>)
 
 
 ### inline\_svg(src\_path, dst\_path)
