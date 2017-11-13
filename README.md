@@ -109,6 +109,9 @@ Sets the description or removes it completely when set to `false`
 + **convert_svg_text_to_html:**
 Converts SVG text in HTML text via the foriegn object tag reducing file bloat and allowing you to style it with CSS. Requires the text be grouped inside a rectangle with the layer name set to `#TEXT`. 
 
++ **spirit:**
+Expands `#spirit='my-id` to `data-spirit-id` when set to `true` for use with the [Spirit animation app](<https://spiritapp.io/>)
+
 
 ### inline\_svg(src\_path, dst\_path)
 In order to animate SVGs markup needs to be placed in-line with HTML. This function will look at the source HTML file and include any references defined by `//import` statements to SVGs that it finds.

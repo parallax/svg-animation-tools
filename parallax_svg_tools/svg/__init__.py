@@ -33,6 +33,10 @@ def parse_svg(path, namespace, options):
 	# Expand origin to data-svg-origin as its a pain in the ass to type
 	if 'expand_origin' in options and options['expand_origin'] == True:
 		file_string = file_string.replace('origin=', 'data-svg-origin=')
+
+	# Expand spirit to data-spirit-id for use with https://spiritapp.io/
+	if 'spirit' in options and options['spirit'] == True:
+		file_string = file_string.replace('spirit=', 'data-spirit-id=')
 	
 	# Add namespaces to ids
 	if namespace:
